@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Interativa - Métodos Contracetivos Cirúrgicos</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --slide-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-pink: #f472b6;
+            --accent-purple: #c084fc;
+            --radius-slide: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Controlo Superior */
+        .top-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        /* Contentor principal da apresentação */
+        .presentation-container {
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            border-radius: var(--radius-slide);
+            overflow: hidden;
+            background-color: var(--slide-bg);
+        }
+
+        /* Adaptação para Ecrã Inteiro Real */
+        :fullscreen .presentation-container,
+        :-webkit-full-screen .presentation-container,
+        :-moz-full-screen .presentation-container {
+            max-width: none;
+            width: 100vw;
+            height: 100vh;
+            aspect-ratio: auto;
+            border-radius: 0;
+        }
+
+        /* Cada Slide individual */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: none; /* Esconde por omissão */
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: var(--slide-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-sizing: border-box;
+        }
+
+        .slide.active {
+            display: flex; /* Mostra APENAS o slide ativo */
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 25px;
+            right: 40px;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Capa / Slide Inicial */
+        .slide-title-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-title-card h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .slide-title-card h2 {
+            font-size: 22px;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .group-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .badge-ppt {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Cabeçalhos */
+        .slide-header h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 30px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .slide-header-line {
+            width: 60px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        /* Conteúdo dos Slides */
+        .slide-content {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .column-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .column-box h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .column-box.vasectomia h4 { color: var(--accent-blue); }
+        .column-box.laqueacao h4 { color: var(--accent-pink); }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .column-box.laqueacao ul li::before {
+            color: var(--accent-pink);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        th {
+            color: var(--accent-purple);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        td {
+            color: var(--text-muted);
+        }
+
+        /* Controlos flutuantes dentro da Tela Cheia */
+        .controls-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            .presentation-container {
+                aspect-ratio: auto;
+                height: 500px;
+            }
+            .slide {
+                padding: 25px;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .slide-title-card h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de controlo externa -->
+    <div class="top-bar">
+        <button class="btn" onclick="toggleFullScreen()">
+            🖥️ Ecrã Inteiro
+        </button>
+    </div>
+
+    <!-- Contentor principal onde apenas UM slide é exibido de cada vez -->
+    <div class="presentation-container" id="presentation">
+
+        <!-- SLIDE 1: CAPA -->
+        <div class="slide slide-title-card active">
+            <h1>Métodos Contracetivos Cirúrgicos</h1>
+            <h2>Vasectomia e Laqueação das Trompas</h2>
+            <div class="group-badges">
+                <div class="badge-ppt">Grupo IV</div>
+                <div class="badge-ppt">David (N.º 8)</div>
+                <div class="badge-ppt">Gonçalo Pacheco (N.º 13)</div>
+                <div class="badge-ppt">Guilherme Vieira (N.º 15)</div>
+            </div>
+            <span class="slide-number">01 / 06</span>
+        </div>
+
+        <!-- SLIDE 2: INTRODUÇÃO -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>O que são métodos cirúrgicos?</h3>
+                <div class="slide-header-line"></div>
+            </div>
+            <div class="slide-content">
+                <p style="font-size: 20px; color: var(--text-main); margin-bottom: 20px;">
+                    Também conhecidos como <strong>esterilização voluntária</strong>, são procedimentos definitivos direcionados a pessoas que já completaram o seu planeamento familiar.
+                </p>
+                <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-purple);">
+                    <p style="margin: 0; font-size: 16px;">
+                        ⚠️ Destacam-se pela <strong>elevadíssima eficácia</strong>, mas exigem uma reflexão profunda prévia, uma vez que a reversão cirúrgica é complexa, dispendiosa e com taxas de sucesso reduzidas.
+                    </p>
+                </div>
+            </div>
+            <span class="slide-number">02 / 06</span>
+        </div>
+
+        <!-- SLIDE 3: VASECTOMIA -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>Vasectomia (Método Masculino)</h3>
+                <div class="slide-header-line" style="background: var(--accent-blue);"></div>
+            </div>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="column-box vasectomia">
+                        <h4>Modo de Ação</h4>
+                        <p style="font-size: 15px; margin-bottom: 15px;">
+                            Corte ou selagem dos canais deferentes em cirurgia simples. O sémen ejaculado deixa de conter espermatozoides.
+                        </p>
+                        <h4 style="font-size: 16px; margin-top: 15px;">Vantagens</h4>
+                        <ul>
+                            <li>Eficácia > 99%.</li>
+                            <li>Cirurgia rápida de ambulatório.</li>
+                            <li>Não afeta a libido nem as ereções.</li>
+                        </ul>
+                    </div>
+                    <div class="column-box vasectomia" style="display: flex; flex-direction: column; justify-content: center;">
+                        <h4 style="color: #ef4444;">Desvantagens / Limitações</h4>
+                        <ul>
+                            <li>Praticamente irreversível.</li>
+                            <li>Não protege contra IST (exige preservativo).</li>
+                            <li>Requer tempo até eliminar espermatozoides residuais.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <span class="slide-number">03 / 06</span>
+        </div>
+
+        <!-- SLIDE 4: LAQUEAÇÃO DAS TROMPAS -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>Laqueação das Trompas (Método Feminino)</h3>
+                <div class="slide-header-line" style="background: var(--accent-pink);"></div>
+            </div>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="column-box laqueacao">
+                        <h4>Modo de Ação</h4>
+                        <p style="font-size: 15px; margin-bottom: 15px;">
+                            Bloqueio ou corte das trompas de Falópio. Impede o encontro entre o óvulo e os espermatozoides.
+                        </p>
+                        <h4 style="font-size: 16px; margin-top: 15px;">Vantagens</h4>
+                        <ul>
+                            <li>Eficácia > 99%.</li>
+                            <li>Solução permanente.</li>
+                            <li>Não altera o ciclo menstrual ou hormonas.</li>
+                        </ul>
+                    </div>
+                    <div class="column-box laqueacao" style="display: flex; flex-direction: column; justify-content: center;">
+                        <h4 style="color: #ef4444;">Desvantagens / Limitações</h4>
+                        <ul>
+                            <li>Cirurgia ligeiramente mais invasiva (laparoscopia).</li>
+                            <li>Elevada dificuldade de reversão.</li>
+                            <li>Não protege contra IST.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <span class="slide-number">04 / 06</span>
+        </div>
+
+        <!-- SLIDE 5: COMPARATIVO -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>Comparação Geral</h3>
+                <div class="slide-header-line" style="background: var(--accent-purple);"></div>
+            </div>
+            <div class="slide-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspeto</th>
+                            <th>Vasectomia</th>
+                            <th>Laqueação das Trompas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Invasividade</strong></td>
+                            <td>Baixa (externa simples)</td>
+                            <td>Média (laparoscopia)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eficácia</strong></td>
+                            <td>Superior a 99%</td>
+                            <td>Superior a 99%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Proteção IST</strong></td>
+                            <td>Nenhuma</td>
+                            <td>Nenhuma</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reversibilidade</strong></td>
+                            <td>Muito difícil</td>
+                            <td>Muito difícil e complexa</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <span class="slide-number">05 / 06</span>
+        </div>
+
+        <!-- SLIDE 6: TAXA DE USO -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>Taxa de Uso (Portugal e Mundo)</h3>
+                <div class="slide-header-line"></div>
+            </div>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="column-box">
+                        <h4>Em Portugal</h4>
+                        <p style="font-size: 15px;">
+                            Os métodos reversíveis (pílula e preservativo) lideram. A esterilização cirúrgica é escolhida essencialmente por adultos/casais que já concluíram o planeamento familiar, estando disponível no SNS com consentimento informado.
+                        </p>
+                    </div>
+                    <div class="column-box">
+                        <h4>Contexto Internacional</h4>
+                        <p style="font-size: 15px;">
+                            Forte adesão no Canadá, EUA e Reino Unido. Na Ásia e América Latina, a laqueação destaca-se por fatores socioculturais. Em países com restrições religiosas severas, a taxa de recurso a estes métodos é reduzida.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <span class="slide-number">06 / 06</span>
+        </div>
+
+        <!-- Botões de navegação sobrepostos (visíveis também no modo ecrã inteiro) -->
+        <div class="controls-overlay">
+            <button class="btn btn-nav" id="prevBtn" onclick="changeSlide(-1)">⬅️ Anterior</button>
+            <button class="btn btn-nav" id="nextBtn" onclick="changeSlide(1)">Seguinte ➡️</button>
+        </div>
+
+    </div>
+
+    <!-- JavaScript para navegação entre slides e tela cheia -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+
+            // Atualizar estado dos botões
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            showSlide(currentSlide);
+        }
+
+        // Suporte para teclas de seta do teclado
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'Space') {
+                changeSlide(1);
+            } else if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // Função de Ecrã Inteiro
+        function toggleFullScreen() {
+            var elem = document.getElementById("presentation");
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        // Inicializar
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
