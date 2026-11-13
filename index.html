@@ -113,7 +113,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            padding: 50px;
+            padding: 40px 50px;
             display: none; /* Esconde por omissão */
             flex-direction: column;
             justify-content: space-between;
@@ -134,7 +134,7 @@
 
         .slide-number {
             position: absolute;
-            bottom: 25px;
+            bottom: 20px;
             right: 40px;
             font-size: 14px;
             color: var(--text-muted);
@@ -184,9 +184,9 @@
         /* Cabeçalhos */
         .slide-header h3 {
             font-family: 'Outfit', sans-serif;
-            font-size: 30px;
+            font-size: 26px;
             color: var(--text-main);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .slide-header-line {
@@ -198,9 +198,9 @@
 
         /* Conteúdo dos Slides */
         .slide-content {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -210,21 +210,21 @@
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 20px;
             width: 100%;
         }
 
         .column-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 14px;
-            padding: 25px;
+            padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .column-box h4 {
             font-family: 'Outfit', sans-serif;
-            font-size: 20px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
         .column-box.vasectomia h4 { color: var(--accent-blue); }
@@ -237,9 +237,9 @@
 
         ul li {
             position: relative;
-            padding-left: 20px;
-            margin-bottom: 8px;
-            font-size: 15px;
+            padding-left: 18px;
+            margin-bottom: 6px;
+            font-size: 14px;
             color: var(--text-muted);
         }
 
@@ -258,12 +258,12 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 15px;
-            margin-top: 10px;
+            font-size: 13.5px;
+            margin-top: 5px;
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 8px 12px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -281,14 +281,14 @@
         /* Controlos flutuantes dentro da Tela Cheia */
         .controls-overlay {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 15px;
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(8px);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
@@ -333,7 +333,7 @@
                 <div class="badge-ppt">Gonçalo Pacheco (N.º 13)</div>
                 <div class="badge-ppt">Guilherme Vieira (N.º 15)</div>
             </div>
-            <span class="slide-number">01 / 06</span>
+            <span class="slide-number">01 / 08</span>
         </div>
 
         <!-- SLIDE 2: INTRODUÇÃO -->
@@ -343,16 +343,16 @@
                 <div class="slide-header-line"></div>
             </div>
             <div class="slide-content">
-                <p style="font-size: 20px; color: var(--text-main); margin-bottom: 20px;">
+                <p style="font-size: 18px; color: var(--text-main); margin-bottom: 15px;">
                     Também conhecidos como <strong>esterilização voluntária</strong>, são procedimentos definitivos direcionados a pessoas que já completaram o seu planeamento familiar.
                 </p>
-                <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-purple);">
-                    <p style="margin: 0; font-size: 16px;">
+                <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-purple);">
+                    <p style="margin: 0; font-size: 15px;">
                         ⚠️ Destacam-se pela <strong>elevadíssima eficácia</strong>, mas exigem uma reflexão profunda prévia, uma vez que a reversão cirúrgica é complexa, dispendiosa e com taxas de sucesso reduzidas.
                     </p>
                 </div>
             </div>
-            <span class="slide-number">02 / 06</span>
+            <span class="slide-number">02 / 08</span>
         </div>
 
         <!-- SLIDE 3: VASECTOMIA -->
@@ -365,10 +365,10 @@
                 <div class="grid-2">
                     <div class="column-box vasectomia">
                         <h4>Modo de Ação</h4>
-                        <p style="font-size: 15px; margin-bottom: 15px;">
+                        <p style="font-size: 14px; margin-bottom: 10px;">
                             Corte ou selagem dos canais deferentes em cirurgia simples. O sémen ejaculado deixa de conter espermatozoides.
                         </p>
-                        <h4 style="font-size: 16px; margin-top: 15px;">Vantagens</h4>
+                        <h4 style="font-size: 15px; margin-top: 10px;">Vantagens</h4>
                         <ul>
                             <li>Eficácia > 99%.</li>
                             <li>Cirurgia rápida de ambulatório.</li>
@@ -385,7 +385,7 @@
                     </div>
                 </div>
             </div>
-            <span class="slide-number">03 / 06</span>
+            <span class="slide-number">03 / 08</span>
         </div>
 
         <!-- SLIDE 4: LAQUEAÇÃO DAS TROMPAS -->
@@ -398,10 +398,10 @@
                 <div class="grid-2">
                     <div class="column-box laqueacao">
                         <h4>Modo de Ação</h4>
-                        <p style="font-size: 15px; margin-bottom: 15px;">
+                        <p style="font-size: 14px; margin-bottom: 10px;">
                             Bloqueio ou corte das trompas de Falópio. Impede o encontro entre o óvulo e os espermatozoides.
                         </p>
-                        <h4 style="font-size: 16px; margin-top: 15px;">Vantagens</h4>
+                        <h4 style="font-size: 15px; margin-top: 10px;">Vantagens</h4>
                         <ul>
                             <li>Eficácia > 99%.</li>
                             <li>Solução permanente.</li>
@@ -418,13 +418,60 @@
                     </div>
                 </div>
             </div>
-            <span class="slide-number">04 / 06</span>
+            <span class="slide-number">04 / 08</span>
         </div>
 
-        <!-- SLIDE 5: COMPARATIVO -->
+        <!-- SLIDE 5: COMPARAÇÃO DA INVASIVIDADE (NOVO) -->
         <div class="slide">
             <div class="slide-header">
-                <h3>Comparação Geral</h3>
+                <h3>Comparação da Invasividade</h3>
+                <div class="slide-header-line" style="background: var(--accent-purple);"></div>
+            </div>
+            <div class="slide-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Vasectomia</th>
+                            <th>Laqueação das Trompas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Acesso Anatómico</strong></td>
+                            <td>Superficial (bolsa escrotal), sem abrir cavidades internas.</td>
+                            <td>Intra-abdominal (cavidade pélvica/abdominal).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tipo de Anestesia</strong></td>
+                            <td>Anestesia local.</td>
+                            <td>Anestesia geral ou raquidiana.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Técnica Cirúrgica</strong></td>
+                            <td>Pequena incisão ou punção (~1 cm) para cortar/bloquear canais deferentes.</td>
+                            <td>Videolaparoscopia (cortes com gás) ou cirurgia aberta.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duração / Internamento</strong></td>
+                            <td>20 a 40 min em ambulatório (alta imediata).</td>
+                            <td>40 a 60 min em bloco operatório (exige recobro).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recuperação</strong></td>
+                            <td>Rápida (regresso em 2 a 3 dias).</td>
+                            <td>Mais lenta (1 a 2 semanas para recuperação total).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <span class="slide-number">05 / 08</span>
+        </div>
+
+        <!-- SLIDE 6: COMPARATIVO GERAL -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>Resumo Comparativo</h3>
                 <div class="slide-header-line" style="background: var(--accent-purple);"></div>
             </div>
             <div class="slide-content">
@@ -460,10 +507,10 @@
                     </tbody>
                 </table>
             </div>
-            <span class="slide-number">05 / 06</span>
+            <span class="slide-number">06 / 08</span>
         </div>
 
-        <!-- SLIDE 6: TAXA DE USO -->
+        <!-- SLIDE 7: TAXA DE USO -->
         <div class="slide">
             <div class="slide-header">
                 <h3>Taxa de Uso (Portugal e Mundo)</h3>
@@ -473,22 +520,44 @@
                 <div class="grid-2">
                     <div class="column-box">
                         <h4>Em Portugal</h4>
-                        <p style="font-size: 15px;">
+                        <p style="font-size: 14px;">
                             Os métodos reversíveis (pílula e preservativo) lideram. A esterilização cirúrgica é escolhida essencialmente por adultos/casais que já concluíram o planeamento familiar, estando disponível no SNS com consentimento informado.
                         </p>
                     </div>
                     <div class="column-box">
                         <h4>Contexto Internacional</h4>
-                        <p style="font-size: 15px;">
+                        <p style="font-size: 14px;">
                             Forte adesão no Canadá, EUA e Reino Unido. Na Ásia e América Latina, a laqueação destaca-se por fatores socioculturais. Em países com restrições religiosas severas, a taxa de recurso a estes métodos é reduzida.
                         </p>
                     </div>
                 </div>
             </div>
-            <span class="slide-number">06 / 06</span>
+            <span class="slide-number">07 / 08</span>
         </div>
 
-        <!-- Botões de navegação sobrepostos (visíveis também no modo ecrã inteiro) -->
+        <!-- SLIDE 8: CONCLUSÃO -->
+        <div class="slide">
+            <div class="slide-header">
+                <h3>Conclusão</h3>
+                <div class="slide-header-line" style="background: var(--accent-purple);"></div>
+            </div>
+            <div class="slide-content" style="display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+                <div class="column-box" style="border-left: 4px solid var(--accent-blue); padding: 15px 20px;">
+                    <p style="font-size: 15px; color: var(--text-main); margin-bottom: 8px;">
+                        • A laqueação das Trompas de Falópio e a vasectomia são os métodos mais seguros (eficácia superior a 99%), mas exigem uma decisão muito ponderada por serem, em regra, irreversíveis.
+                    </p>
+                    <p style="font-size: 15px; color: var(--text-main); margin-bottom: 8px;">
+                        • Estes procedimentos não alteram o desejo sexual nem as hormonas, mas não previnem infeções sexualmente transmissíveis, mantendo-se o preservativo indispensável.
+                    </p>
+                    <p style="font-size: 15px; color: var(--text-main);">
+                        • Embora a vasectomia seja uma cirurgia mais simples e rápida do que a laqueação, ambos os métodos exigem aconselhamento médico prévio para garantir uma decisão consciente e alinhada com o projeto de vida de cada pessoa.
+                    </p>
+                </div>
+            </div>
+            <span class="slide-number">08 / 08</span>
+        </div>
+
+        <!-- Botões de navegação sobrepostos -->
         <div class="controls-overlay">
             <button class="btn btn-nav" id="prevBtn" onclick="changeSlide(-1)">⬅️ Anterior</button>
             <button class="btn btn-nav" id="nextBtn" onclick="changeSlide(1)">Seguinte ➡️</button>
