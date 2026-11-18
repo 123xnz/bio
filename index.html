@@ -9,6 +9,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
     
+   <style>
+    /* Estilo padrão */
+    .info-trabalho {
+        font-size: 1rem;
+    }
+
+    /* Estilo quando estiver em ecrã inteiro */
+    body.fullscreen-ativo .info-trabalho {
+        font-size: 2rem; /* Podes usar valores maiores ou unidades como vw */
+    }
+</style>
+
+<script>
+    // Deteta quando o estado de ecrã inteiro muda
+    document.addEventListener("fullscreenchange", () => {
+        if (document.fullscreenElement) {
+            document.body.classList.add("fullscreen-ativo");
+        } else {
+            document.body.classList.remove("fullscreen-ativo");
+        }
+    });
+</script>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -633,28 +655,7 @@ As taxas de sucesso destas cirurgias também são muito reduzidas, sendo por iss
                 }
             }
         }
-<style>
-    /* Estilo padrão */
-    .info-trabalho {
-        font-size: 1rem;
-    }
 
-    /* Estilo quando estiver em ecrã inteiro */
-    body.fullscreen-ativo .info-trabalho {
-        font-size: 2rem; /* Podes usar valores maiores ou unidades como vw */
-    }
-</style>
-
-<script>
-    // Deteta quando o estado de ecrã inteiro muda
-    document.addEventListener("fullscreenchange", () => {
-        if (document.fullscreenElement) {
-            document.body.classList.add("fullscreen-ativo");
-        } else {
-            document.body.classList.remove("fullscreen-ativo");
-        }
-    });
-</script>
         // Inicializar
         showSlide(currentSlide);
     </script>
